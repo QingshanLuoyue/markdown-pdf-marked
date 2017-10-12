@@ -29,7 +29,7 @@
     "stream-from-to": "^1.4.2",
     "through2": "^2.0.0",
     "tmp": "0.0.31",
-    "marked": "^0.3.6",
+    "marked": "^0.3.6"
   },
   "devDependencies": {
     "coveralls": "^2.10.0",
