@@ -196,7 +196,7 @@ function markdownpdf (opts) {
 
       // self.push(mdParser.render(md))
       // console.log(md)
-      console.log(marked(md))
+      // console.log(marked(md))
       self.push(marked(md))
       self.push(null)
     }
