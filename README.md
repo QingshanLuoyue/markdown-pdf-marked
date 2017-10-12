@@ -1,286 +1,219 @@
-markdown-pdf [![Build Status](https://travis-ci.org/alanshaw/markdown-pdf.svg)](https://travis-ci.org/alanshaw/markdown-pdf) [![Dependency Status](https://david-dm.org/alanshaw/markdown-pdf.svg)](https://david-dm.org/alanshaw/markdown-pdf) [![Coverage Status](https://img.shields.io/coveralls/alanshaw/markdown-pdf.svg?style=flat)](https://coveralls.io/r/alanshaw/markdown-pdf?branch=master)
-===
+#改版与原版的不同
 
-Node module that converts Markdown files to PDFs.
+## 修改markdown-pdf 源码
 
-The PDF looks great because it is styled by HTML5 Boilerplate. What? - Yes! Your Markdown is first converted to HTML, then pushed into the HTML5 Boilerplate `index.html`. Phantomjs renders the page and saves it to a PDF. You can even customise the style of the PDF by passing an optional path to your CSS _and_ you can pre-process your markdown file before it is converted to a PDF by passing in a pre-processing function, for templating.
-
-Getting started
----
-
-    npm install markdown-pdf
-
-Example usage
----
-
-```javascript
-var markdownpdf = require("markdown-pdf")
-  , fs = require("fs")
-
-fs.createReadStream("/path/to/document.md")
-  .pipe(markdownpdf())
-  .pipe(fs.createWriteStream("/path/to/document.pdf"))
-
-// --- OR ---
-
-markdownpdf().from("/path/to/document.md").to("/path/to/document.pdf", function () {
-  console.log("Done")
-})
+### 1
+``` javascript
+  var fs = require('fs')
+  var path = require('path')
+  var childProcess = require('child_process')
+  var through = require('through2')
+  var extend = require('extend')
+  var Remarkable = require('remarkable')
+  var marked = require('marked.js')
+  var hljs = require('highlight.js')
+  var tmp = require('tmp')
+  var duplexer = require('duplexer')
+  var streamft = require('stream-from-to')
 ```
 
-### Options
+在头部引入里面，增加了marked渲染器的引入
 
-Pass an options object (`markdownpdf({/* options */})`) to configure the output.
-
-#### options.cwd
-Type: `String`  
-Default value: `process.cwd()`
-
-Current working directory.
-
-#### options.phantomPath
-Type: `String`  
-Default value: Path provided by phantomjs module
-
-Path to the phantomjs binary.
-
-#### options.cssPath
-Type: `String`  
-Default value: `[module path]/markdown-pdf/css/pdf.css`
-
-Path to custom CSS file, relative to the current directory.
-
-#### options.highlightCssPath
-Type: `String`  
-Default value: `[module path]/markdown-pdf/css/highlight.css`
-
-Path to custom highlight CSS file (for code highlighting with [highlight.js](https://highlightjs.org)), relative to the current directory.
-
-#### options.paperFormat
-Type: `String`  
-Default value: `A4`
-
-'A3', 'A4', 'A5', 'Legal', 'Letter' or 'Tabloid'.
-
-#### options.paperOrientation
-Type: `String`  
-Default value: `portrait`
-
-'portrait' or 'landscape'.
-
-#### options.paperBorder
-Type: `String`  
-Default value: `2cm`
-
-Supported dimension units are: 'mm', 'cm', 'in', 'px'
-
-#### options.runningsPath
-Type: `String`  
-Default value: `runnings.js`
-
-Path to CommonJS module which sets the page header and footer (see [runnings.js](runnings.js)).
-
-#### options.renderDelay
-Type: `Number`  
-Default value: Time until [`page.onLoadFinished`](http://phantomjs.org/api/webpage/handler/on-load-finished.html) event fired
-
-Delay (in ms) before the PDF is rendered.
-
-#### options.loadTimeout
-Type: `Number`  
-Default value: `10000`
-
-If `renderDelay` option isn't set, this is the timeout (in ms) before the page is rendered in case the `page.onLoadFinished` event doesn't fire.
-
-#### options.preProcessMd
-Type: `Function`  
-Default value: `function () { return through() }`
-
-A function that returns a [through2 stream](https://npmjs.org/package/through2) that transforms the markdown before it is converted to HTML.
-
-#### options.preProcessHtml
-Type: `Function`  
-Default value: `function () { return through() }`
-
-A function that returns a [through2 stream](https://npmjs.org/package/through2) that transforms the HTML before it is converted to PDF.
-
-#### options.remarkable
-Type: `object`  
-Default value: `{ html: true, breaks: true }`
-
-A config object that is passed to [remarkable](https://www.npmjs.com/package/remarkable#options), the underlying markdown parser.
-
-##### options.remarkable.preset
-Type: `String`
-Default value: `default`
-
-Use remarkable [presets](https://www.npmjs.com/package/remarkable#presets) as a convenience to quickly enable/disable active syntax rules and options for common use cases.
-
-Supported values are `default`, `commonmark` and `full`
-
-##### options.remarkable.plugins
-Type: `Array` of remarkable-plugin `Function`s  
-Default value: `[]`
-
-An array of Remarkable plugin functions, that extend the markdown parser functionality.
-
-##### options.remarkable.syntax
-Type: `Array` of optional remarkable syntax `Strings`s  
-Default value: `[]`
-
-An array of [optional Remarkable syntax extensions](https://github.com/jonschlinkert/remarkable#syntax-extensions), disabled by default, that extend the markdown parser functionality.
-
-API
----
-
-### from.path(path, opts) / from(path, opts)
-
-Create a readable stream from `path` and pipe to markdown-pdf. `path` can be a single path or array of paths.
-
-### from.string(string)
-
-Create a readable stream from `string` and pipe to markdown-pdf. `string` can be a single string or array of strings.
-
-### concat.from.paths(paths, opts)
-
-Create and concatenate readable streams from `paths` and pipe to markdown-pdf.
-
-### concat.from.strings(strings, opts)
-
-Create and concatenate readable streams from `strings` and pipe to markdown-pdf.
-
-### to.path(path, cb) / to(path, cb)
-
-Create a writeable stream to `path` and pipe output from markdown-pdf to it. `path` can be a single path, or array of output paths if you specified an array of inputs. The callback function `cb` will be invoked when data has finished being written.
-
-### to.buffer(opts, cb)
-
-Create a [concat-stream](https://npmjs.org/package/concat-stream) and pipe output from markdown-pdf to it. The callback function `cb` will be invoked when the buffer has been created.
-
-### to.string(opts, cb)
-
-Create a [concat-stream](https://npmjs.org/package/concat-stream) and pipe output from markdown-pdf to it. The callback function `cb` will be invoked when the string has been created.
-
-More examples
----
-
-### From string to path
-
-```javascript
-var markdownpdf = require("markdown-pdf")
-
-var md = "foo===\n* bar\n* baz\n\nLorem ipsum dolor sit"
-  , outputPath = "/path/to/doc.pdf"
-
-markdownpdf().from.string(md).to(outputPath, function () {
-  console.log("Created", outputPath)
-})
+``` javascript
+  var marked = require('marked.js')
 ```
 
-### From multiple paths to multiple paths
-
-```javascript
-var markdownpdf = require("markdown-pdf")
-
-var mdDocs = ["home.md", "about.md", "contact.md"]
-  , pdfDocs = mdDocs.map(function (d) { return "out/" + d.replace(".md", ".pdf") })
-
-markdownpdf().from(mdDocs).to(pdfDocs, function () {
-  pdfDocs.forEach(function (d) { console.log("Created", d) })
-})
-```
-
-### Concat from multiple paths to single path
-
-```javascript
-var markdownpdf = require("markdown-pdf")
-
-var mdDocs = ["chapter1.md", "chapter2.md", "chapter3.md"]
-  , bookPath = "/path/to/book.pdf"
-
-markdownpdf().concat.from(mdDocs).to(bookPath, function () {
-  console.log("Created", bookPath)
-})
-```
-
-### Transform markdown before conversion
-
-```javascript
-var markdownpdf = require("markdown-pdf")
-  , split = require("split")
-  , through = require("through")
-  , duplexer = require("duplexer")
-
-function preProcessMd () {
-  // Split the input stream by lines
-  var splitter = split()
-
-  // Replace occurences of "foo" with "bar"
-  var replacer = through(function (data) {
-    this.queue(data.replace(/foo/g, "bar") + "\n")
-  })
-
-  splitter.pipe(replacer)
-  return duplexer(splitter, replacer)
+### 2
+紧接在后添加 marked的配置
+``` javascript
+var renderer = new marked.Renderer();
+// marked里重新定义了escape 和unescape 函数，重写renderer.code 方法的时候会用到，所以在这里再定义一次
+function escape(html, encode) {
+  return html
+    .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
-markdownpdf({preProcessMd: preProcessMd})
-  .from("/path/to/document.md")
-  .to("/path/to/document.pdf", function () { console.log("Done") })
-```
-
-### Remarkable options and plugins
-
-Example using [remarkable-classy](https://www.npmjs.com/package/remarkable-classy) plugin:
-
-```javascript
-var markdownpdf = require("markdown-pdf")
-
-var options = {
-    remarkable: {
-        html: true,
-        breaks: true,
-        plugins: [ require('remarkable-classy') ],
-		syntax: [ 'footnote', 'sup', 'sub' ]
+function unescape(html) {
+  // explicitly match decimal, hex, and named HTML entities 
+  return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g, function(_, n) {
+    n = n.toLowerCase();
+    if (n === 'colon') return ':';
+    if (n.charAt(0) === '#') {
+      return n.charAt(1) === 'x'
+        ? String.fromCharCode(parseInt(n.substring(2), 16))
+        : String.fromCharCode(+n.substring(1));
     }
+    return '';
+  });
 }
 
-markdownpdf(options)
-  .from("/path/to/document.md")
-  .to("/path/to/document.pdf", function () { console.log("Done") })
+renderer.code = function(code, lang, escaped) {
+    if (this.options.highlight) {
+        var out = this.options.highlight(code, lang);
+        if (out != null && out !== code) {
+            escaped = true;
+            code = out;
+        }
+    }
+
+    if (!lang) {
+        return '<pre><code>' +
+            (escaped ? code : escape(code, true)) +
+            '\n</code></pre>';
+    }
+
+    return '<pre><code class="' +
+        this.options.langPrefix +
+        escape(lang, true) +
+        ' hljs">' +
+        (escaped ? code : escape(code, true)) +
+        '\n</code></pre>\n';
+};
+renderer.link = function(href, title, text) {
+    if (this.options.sanitize) {
+        try {
+            var prot = decodeURIComponent(unescape(href))
+                .replace(/[^\w:]/g, '')
+                .toLowerCase();
+        } catch (e) {
+            return '';
+        }
+        if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
+            return '';
+        }
+    }
+    var solveText = text.toString().split('|');
+    var strTarget = '';
+    if (solveText[1]) {
+        strTarget = 'target="_' + solveText[1].replace(/\s/g, '') + '"';
+    }
+    var out = '<a ' + strTarget + ' href="' + href + '"';
+    if (title) {
+        out += ' title="' + title + '"';
+    }
+    out += '>' + solveText[0] + '</a>';
+    return out;
+};
+renderer.image = function(href, title, text) {
+    var imgAttr = '';
+    if (text) {
+        var s = text.toString().replace(/\s/, '').split('|');
+        if (s[0]) {
+            s[0] = s[0].replace(/&#39;/g, '');
+            imgAttr += ' alt="' + s[0].replace(/@/, '') + '"';
+            console.log(imgAttr);
+        }
+        if (s[1]) {
+            imgAttr += ' style="text-align:' + s[1] + ';';
+        }
+        if (s[2]) {
+            var w = s[2].split('x')[0];
+            var h = s[2].split('x')[1];
+            w = w == 0 ? 'auto' : (w + 'px');
+            h = h == 0 ? 'auto' : h + ('px');
+            imgAttr += 'width:' + w + ';height:' + h + ';';
+        }
+        imgAttr += '" ';
+    }
+    var out = '<img src="' + href + imgAttr;
+    if (title) {
+        out += ' title="' + title + '"';
+    }
+    out += this.options.xhtml ? '/>' : '>';
+    return out;
+};
+marked.setOptions({
+    renderer: renderer,
+    langPrefix: '',
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+    highlight: function (code, lang) {
+      // return require('highlight.js').highlightAuto(code).value;
+      // console.log(require('highlight.js').highlight(lang, code).value)
+      // console.log(code, lang)
+      return require('highlight.js').highlight(lang, code).value;
+    }
+});
+```
+在上面 重写了 renderer.code 、renderer.link 、renderer.image 方法，在renderer.code里面的
+``` javascript
+  return '<pre><code class="' +
+        this.options.langPrefix +
+        escape(lang, true) +
+        ' hljs">' +
+        (escaped ? code : escape(code, true)) +
+        '\n</code></pre>\n';
+```
+里面添加了 hljs类名
+
+因为使用 
+``` javascript
+  require('highlight.js').highlight(lang, code).value; 
+```
+进行渲染，语言标签不会加上hljs类名，导致最后样式偏差
+
+### 3
+``` javascript
+  function flush (cb) {
+      var self = this
+
+      var mdParser = new Remarkable(opts.remarkable.preset, extend({
+        highlight: function (str, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            try {
+              return hljs.highlight(lang, str).value
+            } catch (err) {}
+          }
+
+          try {
+            return hljs.highlightAuto(str).value
+          } catch (err) {}
+
+          return ''
+        }
+      }, opts.remarkable))
+
+      opts.remarkable.plugins.forEach(function (plugin) {
+        if (plugin && typeof plugin === 'function') {
+          mdParser.use(plugin)
+        }
+      })
+
+      opts.remarkable.syntax.forEach(function (rule) {
+        try {
+          mdParser.core.ruler.enable([rule])
+        } catch (err) {}
+        try {
+          mdParser.block.ruler.enable([rule])
+        } catch (err) {}
+        try {
+          mdParser.inline.ruler.enable([rule])
+        } catch (err) {}
+      })
+
+      // self.push(mdParser.render(md))
+      console.log(marked(md))
+      self.push(marked(md))
+      self.push(null)
+    }
+```
+在上面的flush函数里面 注释了
+``` javascript
+  self.push(mdParser.render(md))
+```
+添加了
+``` javascript
+  self.push(marked(md))
 ```
 
-CLI interface
----
-
-### Installation
-
-To use markdown-pdf as a standalone program from the terminal run
-
-```sh
-npm install -g markdown-pdf
-```
-
-### Usage
-
-```
-Usage: markdown-pdf [options] <markdown-file-path>
-
-Options:
-
-  -h, --help                             output usage information
-  -V, --version                          output the version number
-  <markdown-file-path>                   Path of the markdown file to convert
-  -c, --cwd [path]                       Current working directory
-  -p, --phantom-path [path]              Path to phantom binary
-  -h, --runnings-path [path]             Path to runnings (header, footer)
-  -s, --css-path [path]                  Path to custom CSS file
-  -z, --highlight-css-path [path]        Path to custom highlight-CSS file
-  -m, --remarkable-options [json]        Options to pass to Remarkable
-  -f, --paper-format [format]            'A3', 'A4', 'A5', 'Legal', 'Letter' or 'Tabloid'
-  -r, --paper-orientation [orientation]  'portrait' or 'landscape'
-  -b, --paper-border [measurement]       Supported dimension units are: 'mm', 'cm', 'in', 'px'
-  -d, --render-delay [millis]            Delay before rendering the PDF
-  -t, --load-timeout [millis]            Timeout before the page is rendered in case `page.onLoadFinished` isn't fired
-  -o, --out [path]                       Path of where to save the PDF
-```
+## 查看原版ReadMe.md
+![originReadMe.md](./originReadMe.md)

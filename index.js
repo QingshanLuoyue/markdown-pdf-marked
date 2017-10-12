@@ -12,7 +12,7 @@ var streamft = require('stream-from-to')
 
 
 var renderer = new marked.Renderer();
-// marked里重新定义了escape 和unescape 函数
+// marked里重新定义了escape 和unescape 函数，重写renderer.code 方法的时候会用到，所以在这里再定义一次
 function escape(html, encode) {
   return html
     .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
@@ -104,7 +104,7 @@ renderer.image = function(href, title, text) {
         }
         imgAttr += '" ';
     }
-    var out = '<img src="' + href + '?v='+ timestamp +'"' + imgAttr;
+    var out = '<img src="' + href + imgAttr;
     if (title) {
         out += ' title="' + title + '"';
     }
