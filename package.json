@@ -34,6 +34,7 @@
   "devDependencies": {
     "coveralls": "^2.10.0",
     "istanbul": "^0.4.0",
+    "marked": "^0.3.6",
     "pdf-text": "^0.4.0",
     "standard": "^10.0.2",
     "tape": "^4.2.2"

@@ -1,18 +1,33 @@
-var fs = require('fs')
-var path = require('path')
-var childProcess = require('child_process')
-var through = require('through2')
-var extend = require('extend')
-var Remarkable = require('remarkable')
-var marked = require('marked.js')
-var hljs = require('highlight.js')
-var tmp = require('tmp')
-var duplexer = require('duplexer')
-var streamft = require('stream-from-to')
+#改版与原版的不同
 
+## 修改markdown-pdf 源码
 
+### 1
+``` javascript
+  var fs = require('fs')
+  var path = require('path')
+  var childProcess = require('child_process')
+  var through = require('through2')
+  var extend = require('extend')
+  var Remarkable = require('remarkable')
+  var marked = require('marked.js')
+  var hljs = require('highlight.js')
+  var tmp = require('tmp')
+  var duplexer = require('duplexer')
+  var streamft = require('stream-from-to')
+```
+
+在头部引入里面，增加了marked渲染器的引入
+
+``` javascript
+  var marked = require('marked.js')
+```
+
+### 2
+紧接在后添加 marked的配置
+``` javascript
 var renderer = new marked.Renderer();
-// marked里重新定义了escape 和unescape 函数
+// marked里重新定义了escape 和unescape 函数，重写renderer.code 方法的时候会用到，所以在这里再定义一次
 function escape(html, encode) {
   return html
     .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
@@ -104,7 +119,7 @@ renderer.image = function(href, title, text) {
         }
         imgAttr += '" ';
     }
-    var out = '<img src="' + href + '?v='+ timestamp +'"' + imgAttr;
+    var out = '<img src="' + href + imgAttr;
     if (title) {
         out += ' title="' + title + '"';
     }
@@ -128,36 +143,27 @@ marked.setOptions({
       return require('highlight.js').highlight(lang, code).value;
     }
 });
+```
+在上面 重写了 renderer.code 、renderer.link 、renderer.image 方法，在renderer.code里面的
+``` javascript
+  return '<pre><code class="' +
+        this.options.langPrefix +
+        escape(lang, true) +
+        ' hljs">' +
+        (escaped ? code : escape(code, true)) +
+        '\n</code></pre>\n';
+```
+里面添加了 hljs类名
 
-tmp.setGracefulCleanup()
+因为使用 
+``` javascript
+  require('highlight.js').highlight(lang, code).value; 
+```
+进行渲染，语言标签不会加上hljs类名，导致最后样式偏差
 
-function markdownpdf (opts) {
-  opts = opts || {}
-  opts.cwd = opts.cwd ? path.resolve(opts.cwd) : process.cwd()
-  opts.phantomPath = opts.phantomPath || require('phantomjs-prebuilt').path
-  opts.runningsPath = opts.runningsPath ? path.resolve(opts.runningsPath) : path.join(__dirname, 'runnings.js')
-  opts.cssPath = opts.cssPath ? path.resolve(opts.cssPath) : path.join(__dirname, 'css', 'pdf.css')
-  opts.highlightCssPath = opts.highlightCssPath ? path.resolve(opts.highlightCssPath) : path.join(__dirname, 'css', 'highlight.css')
-  opts.paperFormat = opts.paperFormat || 'A4'
-  opts.paperOrientation = opts.paperOrientation || 'portrait'
-  opts.paperBorder = opts.paperBorder || '2cm'
-  opts.renderDelay = opts.renderDelay == null ? 0 : opts.renderDelay
-  opts.loadTimeout = opts.loadTimeout == null ? 10000 : opts.loadTimeout
-  opts.preProcessMd = opts.preProcessMd || function () { return through() }
-  opts.preProcessHtml = opts.preProcessHtml || function () { return through() }
-  opts.remarkable = extend({html: true, breaks: true}, opts.remarkable)
-  opts.remarkable.preset = opts.remarkable.preset || 'default'
-  opts.remarkable.plugins = opts.remarkable.plugins || []
-  opts.remarkable.syntax = opts.remarkable.syntax || []
-
-  var md = ''
-
-  var mdToHtml = through(
-    function transform (chunk, enc, cb) {
-      md += chunk
-      cb()
-    },
-    function flush (cb) {
+### 3
+``` javascript
+  function flush (cb) {
       var self = this
 
       var mdParser = new Remarkable(opts.remarkable.preset, extend({
@@ -195,73 +201,18 @@ function markdownpdf (opts) {
       })
 
       // self.push(mdParser.render(md))
-      // console.log(md)
       console.log(marked(md))
       self.push(marked(md))
       self.push(null)
     }
-  )
+```
+在上面的flush函数里面 注释了
+``` javascript
+  self.push(mdParser.render(md))
+```
+添加了
+``` javascript
+  self.push(marked(md))
+```
 
-  var inputStream = through()
-  var outputStream = through()
 
-  // Stop input stream emitting data events until we're ready to read them
-  inputStream.pause()
-
-  // Create tmp file to save HTML for phantom to process
-  tmp.file({postfix: '.html'}, function (err, tmpHtmlPath, tmpHtmlFd) {
-    if (err) return outputStream.emit('error', err)
-    fs.closeSync(tmpHtmlFd)
-
-    // Create tmp file to save PDF to
-    tmp.file({postfix: '.pdf'}, function (err, tmpPdfPath, tmpPdfFd) {
-      if (err) return outputStream.emit('error', err)
-      fs.closeSync(tmpPdfFd)
-
-      var htmlToTmpHtmlFile = fs.createWriteStream(tmpHtmlPath)
-
-      htmlToTmpHtmlFile.on('finish', function () {
-        // Invoke phantom to generate the PDF
-        var childArgs = [
-          path.join(__dirname, 'phantom', 'render.js'),
-          tmpHtmlPath,
-          tmpPdfPath,
-          opts.cwd,
-          opts.runningsPath,
-          opts.cssPath,
-          opts.highlightCssPath,
-          opts.paperFormat,
-          opts.paperOrientation,
-          opts.paperBorder,
-          opts.renderDelay,
-          opts.loadTimeout
-        ]
-
-        childProcess.execFile(opts.phantomPath, childArgs, function (err, stdout, stderr) {
-          // if (stdout) console.log(stdout)
-          // if (stderr) console.error(stderr)
-          if (err) return outputStream.emit('error', err)
-          fs.createReadStream(tmpPdfPath).pipe(outputStream)
-        })
-      })
-
-      // Setup the pipeline
-      inputStream
-        .pipe(opts.preProcessMd())
-        .pipe(mdToHtml)
-        .pipe(opts.preProcessHtml())
-        .pipe(htmlToTmpHtmlFile)
-
-      inputStream.resume()
-    })
-  })
-
-  return extend(
-    duplexer(inputStream, outputStream),
-    streamft(function () {
-      return markdownpdf(opts)
-    })
-  )
-}
-
-module.exports = markdownpdf
