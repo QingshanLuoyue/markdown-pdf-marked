@@ -1,6 +1,6 @@
 {
   "name": "markdown-pdf-marked",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Markdown to PDF converter",
   "main": "index.js",
   "scripts": {
@@ -40,10 +40,5 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "standard": {
-    "ignore": [
-      "html5bp/**"
-    ]
-  },
+  }
 }
