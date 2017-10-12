@@ -1,6 +1,5 @@
 .DS_Store
 node_modules/
-test/
 local/
 src/static/images-local/
 npm-debug.log*
