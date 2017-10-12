@@ -1,0 +1,1043 @@
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block
+}
+audio,
+canvas,
+video {
+    display: inline-block
+}
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+[hidden],
+template {
+    display: none
+}
+body {
+    margin: 0
+}
+a:active,
+a:hover,
+a:focus {
+    outline: 0
+}
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+abbr[title] {
+    border-bottom: 1px dotted
+}
+b,
+strong {
+    font-weight: bold
+}
+dfn {
+    font-style: italic
+}
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0
+}
+mark {
+    background: #ff0;
+    color: #000
+}
+pre {
+    white-space: pre-wrap
+}
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019"
+}
+small {
+    font-size: 80%
+}
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline
+}
+sup {
+    top: -0.5em
+}
+sub {
+    bottom: -0.25em
+}
+img {
+    border: 0
+}
+svg:not(:root) {
+    overflow: hidden
+}
+figure {
+    margin: 0
+}
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: .35em .625em .75em
+}
+legend {
+    border: 0;
+    padding: 0
+}
+button,
+input,
+select,
+textarea {
+    margin: 0
+}
+button,
+input {
+    line-height: normal
+}
+button,
+select {
+    text-transform: none
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer
+}
+button[disabled],
+html input[disabled] {
+    cursor: default
+}
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0
+}
+input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0
+}
+textarea {
+    overflow: auto;
+    vertical-align: top
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+html {
+    font-size: 62.5%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+body {
+    font-size: 15px;
+    line-height: 1.45;
+    color: #2c3f51;
+    background-color: none
+}
+input,
+button,
+select,
+textarea {
+    font-size: inherit;
+    line-height: inherit
+}
+img {
+    vertical-align: middle
+}
+hr {
+    margin-top: 21px;
+    margin-bottom: 21px;
+    border: 0;
+    border-top: 1px solid rgba(102, 128, 153, 0.1)
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: 'PingFangSC-Light', 'Helvetica Neue', 'Hiragino Sansgb', 'Arial', 'Microsoft Yahei', 'Microsoft Yahei ui', 'Simsun', 'Sans-serif';
+    font-weight: 300;
+    line-height: 1.1;
+    color: inherit
+}
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small,
+.h1 small,
+.h2 small,
+.h3 small,
+.h4 small,
+.h5 small,
+.h6 small,
+h1 .small,
+h2 .small,
+h3 .small,
+h4 .small,
+h5 .small,
+h6 .small,
+.h1 .small,
+.h2 .small,
+.h3 .small,
+.h4 .small,
+.h5 .small,
+.h6 .small {
+    font-weight: normal;
+    line-height: 1;
+    color: #999
+}
+h1,
+h2,
+h3 {
+    margin-top: 21px;
+    margin-bottom: 10.5px
+}
+h1 small,
+h2 small,
+h3 small,
+h1 .small,
+h2 .small,
+h3 .small {
+    font-size: 65%
+}
+h4,
+h5,
+h6 {
+    margin-top: 10.5px;
+    margin-bottom: 10.5px
+}
+h4 small,
+h5 small,
+h6 small,
+h4 .small,
+h5 .small,
+h6 .small {
+    font-size: 75%
+}
+h1,
+.h1 {
+    font-size: 39px
+}
+h2,
+.h2 {
+    font-size: 32px
+}
+h3,
+.h3 {
+    font-size: 26px
+}
+h4,
+.h4 {
+    font-size: 19px
+}
+h5,
+.h5 {
+    font-size: 15px
+}
+h6,
+.h6 {
+    font-size: 13px
+}
+p {
+    margin: 0 0 10.5px
+}
+small,
+.small {
+    font-size: 85%
+}
+cite {
+    font-style: normal
+}
+ul,
+ol {
+    margin-top: 0;
+    margin-bottom: 10.5px
+}
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+    margin-bottom: 0
+}
+dl {
+    margin-top: 0;
+    margin-bottom: 21px
+}
+dt,
+dd {
+    line-height: 1.45
+}
+dt {
+    font-weight: bold
+}
+dd {
+    margin-left: 0
+}
+abbr[title],
+abbr[data-original-title] {
+    cursor: help;
+    border-bottom: 1px dotted #999
+}
+blockquote {
+    padding: 10.5px 21px;
+    margin: 0 0 21px;
+    border-left: 5px solid rgba(102, 128, 153, 0.075)
+}
+blockquote p {
+    font-size: 18.75px;
+    font-weight: 300;
+    line-height: 1.25
+}
+blockquote p:last-child {
+    margin-bottom: 0
+}
+blockquote small,
+blockquote .small {
+    display: block;
+    line-height: 1.45;
+    color: #999
+}
+blockquote small:before,
+blockquote .small:before {
+    content: '\2014 \00A0'
+}
+blockquote.pull-right {
+    padding-right: 15px;
+    padding-left: 0;
+    border-right: 5px solid rgba(102, 128, 153, 0.075);
+    border-left: 0
+}
+blockquote.pull-right p,
+blockquote.pull-right small,
+blockquote.pull-right .small {
+    text-align: right
+}
+blockquote.pull-right small:before,
+blockquote.pull-right .small:before {
+    content: ''
+}
+blockquote.pull-right small:after,
+blockquote.pull-right .small:after {
+    content: '\00A0 \2014'
+}
+blockquote:before,
+blockquote:after {
+    content: ""
+}
+address {
+    margin-bottom: 21px;
+    font-style: normal;
+    line-height: 1.45
+}
+code {
+    padding: 2px 4px;
+    color: #2c3f51;
+    background-color: rgba(102, 128, 153, 0.075);
+    white-space: nowrap;
+    border-radius: 4px
+}
+pre {
+    display: block;
+    padding: 10px;
+    margin: 0 0 10.5px;
+    line-height: 1.45;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #333;
+    background-color: rgba(102, 128, 153, 0.05);
+    border: 1px solid rgba(102, 128, 153, 0.075);
+    border-radius: 4px
+}
+pre code {
+    padding: 0;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0
+}
+.pre-scrollable {
+    max-height: 340px;
+    overflow-y: scroll
+}
+.pln {
+    color: #000
+}
+.str {
+    color: #080
+}
+.kwd {
+    color: #008
+}
+.com {
+    color: #800
+}
+.typ {
+    color: #606
+}
+.lit {
+    color: #066
+}
+.pun,
+.opn,
+.clo {
+    color: #660
+}
+.tag {
+    color: #008
+}
+.atn {
+    color: #606
+}
+.atv {
+    color: #080
+}
+.dec,
+.var {
+    color: #606
+}
+.fun {
+    color: #f00
+}
+pre.prettyprint {
+    padding: 0;
+    border: 0
+}
+ol.linenums {
+    margin-top: 0;
+    margin-bottom: 0
+}
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L5,
+li.L6,
+li.L7,
+li.L8 {
+    list-style-type: none
+}
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 {
+    background: #eee
+}
+a code {
+    color: inherit
+}
+h1 {
+    font-size: 2.6em
+}
+h2 {
+    font-size: 2.15em
+}
+h3 {
+    font-size: 1.7em
+}
+h4 {
+    font-size: 1.25em
+}
+h5 {
+    font-size: 1em
+}
+h6 {
+    font-size: .85em
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 1.8em 0;
+    text-align: start
+}
+pre {
+    word-break: break-word
+}
+p,
+pre,
+pre.prettyprint,
+blockquote {
+    margin: 0 0 1.1em
+}
+hr {
+    margin: 2em 0
+}
+img {
+    max-width: 100%
+}
+code,
+code *,
+pre,
+pre * {
+    font-family: 'SF Mono', 'Menio', 'Consolas', 'Monaco', 'monospace', 'PingFangSC-Light', 'Helvetica Neue', 'Hiragino Sansgb', 'Arial', 'Microsoft Yahei', 'Microsoft Yahei ui', 'Simsun', 'Sans-serif';
+    font-size: 12px;
+}
+code {
+    white-space: normal
+}
+pre,
+pre.prettyprint {
+    text-align: start;
+    border: 0;
+    border-radius: 5px;
+    word-break: break-all
+}
+pre code,
+pre.prettyprint code {
+    padding: 1.3em 2em !important
+}
+pre.prettyprint.with-line-number {
+    position: relative
+}
+pre.prettyprint.with-line-number code {
+    padding-left: 3.3em !important
+}
+pre.prettyprint.with-line-number .hljs-comment.line-number {
+    min-width: 2.2em;
+    display: inline-block;
+    text-align: right;
+    opacity: .8;
+    position: absolute;
+    left: .3em
+}
+.hljs-comment.line-number {
+    display: none
+}
+dt,
+dd {
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+dd {
+    margin-left: 40px
+}
+table {
+    margin-bottom: 20px
+}
+table th,
+table td {
+    padding: 8px;
+    line-height: 20px;
+    vertical-align: top;
+    border-top: 1px solid #ddd
+}
+table th {
+    font-weight: bold
+}
+table thead th {
+    vertical-align: bottom
+}
+table caption+thead tr:first-child th,
+table caption+thead tr:first-child td,
+table colgroup+thead tr:first-child th,
+table colgroup+thead tr:first-child td,
+table thead:first-child tr:first-child th,
+table thead:first-child tr:first-child td {
+    border-top: 0
+}
+table tbody+tbody {
+    border-top: 2px solid #ddd
+}
+blockquote {
+    border-left-width: 10px;
+    background-color: rgba(102, 128, 153, 0.05);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 15px 20px
+}
+blockquote p {
+    margin-bottom: 1.1em;
+    font-size: 1em;
+    line-height: 1.45
+}
+blockquote ul:last-child,
+blockquote ol:last-child {
+    margin-bottom: 0
+}
+ul,
+ol {
+    margin-bottom: 1.1em
+}
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+    margin-bottom: 1.1em
+}
+kbd {
+    padding: .1em .6em;
+    border: 1px solid rgba(44, 63, 81, 0.25);
+    -webkit-box-shadow: 0 1px 0 rgba(44, 63, 81, 0.25);
+    box-shadow: 0 1px 0 rgba(44, 63, 81, 0.25);
+    font-size: .7em;
+    font-family: 'PingFangSC-Light', 'Helvetica Neue', 'Hiragino Sansgb', 'Arial', 'Microsoft Yahei', 'Microsoft Yahei ui', 'Simsun', 'Sans-serif';
+    background-color: #fff;
+    color: #333;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 0 .1em;
+    white-space: nowrap
+}
+.hljs-light .hljs {
+    display: block;
+    padding: .5em;
+    background-color: #f0f0f0
+}
+.hljs-light .hljs,
+.hljs-light .hljs-subst,
+.hljs-light .hljs-tag .hljs-title,
+.hljs-light .lisp .hljs-title,
+.hljs-light .clojure .hljs-built_in,
+.hljs-light .nginx .hljs-title {
+    color: #000
+}
+.hljs-light .hljs-string,
+.hljs-light .hljs-title,
+.hljs-light .hljs-constant,
+.hljs-light .hljs-parent,
+.hljs-light .hljs-tag .hljs-value,
+.hljs-light .hljs-rules .hljs-value,
+.hljs-light .hljs-rules .hljs-value .hljs-number,
+.hljs-light .hljs-preprocessor,
+.hljs-light .hljs-pragma,
+.hljs-light .haml .hljs-symbol,
+.hljs-light .ruby .hljs-symbol,
+.hljs-light .ruby .hljs-symbol .hljs-string,
+.hljs-light .hljs-aggregate,
+.hljs-light .hljs-template_tag,
+.hljs-light .django .hljs-variable,
+.hljs-light .smalltalk .hljs-class,
+.hljs-light .hljs-addition,
+.hljs-light .hljs-flow,
+.hljs-light .hljs-stream,
+.hljs-light .bash .hljs-variable,
+.hljs-light .apache .hljs-tag,
+.hljs-light .apache .hljs-cbracket,
+.hljs-light .tex .hljs-command,
+.hljs-light .tex .hljs-special,
+.hljs-light .erlang_repl .hljs-function_or_atom,
+.hljs-light .asciidoc .hljs-header,
+.hljs-light .markdown .hljs-header,
+.hljs-light .coffeescript .hljs-attribute {
+    color: #800
+}
+.hljs-light .smartquote,
+.hljs-light .hljs-comment,
+.hljs-light .hljs-annotation,
+.hljs-light .hljs-template_comment,
+.hljs-light .diff .hljs-header,
+.hljs-light .hljs-chunk,
+.hljs-light .asciidoc .hljs-blockquote,
+.hljs-light .markdown .hljs-blockquote {
+    color: #888
+}
+.hljs-light .hljs-number,
+.hljs-light .hljs-date,
+.hljs-light .hljs-regexp,
+.hljs-light .hljs-literal,
+.hljs-light .hljs-hexcolor,
+.hljs-light .smalltalk .hljs-symbol,
+.hljs-light .smalltalk .hljs-char,
+.hljs-light .go .hljs-constant,
+.hljs-light .hljs-change,
+.hljs-light .lasso .hljs-variable,
+.hljs-light .makefile .hljs-variable,
+.hljs-light .asciidoc .hljs-bullet,
+.hljs-light .markdown .hljs-bullet,
+.hljs-light .asciidoc .hljs-link_url,
+.hljs-light .markdown .hljs-link_url {
+    color: #080
+}
+.hljs-light .hljs-label,
+.hljs-light .hljs-javadoc,
+.hljs-light .ruby .hljs-string,
+.hljs-light .hljs-decorator,
+.hljs-light .hljs-filter .hljs-argument,
+.hljs-light .hljs-localvars,
+.hljs-light .hljs-array,
+.hljs-light .hljs-attr_selector,
+.hljs-light .hljs-important,
+.hljs-light .hljs-pseudo,
+.hljs-light .hljs-pi,
+.hljs-light .haml .hljs-bullet,
+.hljs-light .hljs-doctype,
+.hljs-light .hljs-deletion,
+.hljs-light .hljs-envvar,
+.hljs-light .hljs-shebang,
+.hljs-light .apache .hljs-sqbracket,
+.hljs-light .nginx .hljs-built_in,
+.hljs-light .tex .hljs-formula,
+.hljs-light .erlang_repl .hljs-reserved,
+.hljs-light .hljs-prompt,
+.hljs-light .asciidoc .hljs-link_label,
+.hljs-light .markdown .hljs-link_label,
+.hljs-light .vhdl .hljs-attribute,
+.hljs-light .clojure .hljs-attribute,
+.hljs-light .asciidoc .hljs-attribute,
+.hljs-light .lasso .hljs-attribute,
+.hljs-light .coffeescript .hljs-property,
+.hljs-light .hljs-phony {
+    color: #88f
+}
+.hljs-light .hljs-keyword,
+.hljs-light .hljs-id,
+.hljs-light .hljs-title,
+.hljs-light .hljs-built_in,
+.hljs-light .hljs-aggregate,
+.hljs-light .css .hljs-tag,
+.hljs-light .hljs-javadoctag,
+.hljs-light .hljs-phpdoc,
+.hljs-light .hljs-yardoctag,
+.hljs-light .smalltalk .hljs-class,
+.hljs-light .hljs-winutils,
+.hljs-light .bash .hljs-variable,
+.hljs-light .apache .hljs-tag,
+.hljs-light .go .hljs-typename,
+.hljs-light .tex .hljs-command,
+.hljs-light .asciidoc .hljs-strong,
+.hljs-light .markdown .hljs-strong,
+.hljs-light .hljs-request,
+.hljs-light .hljs-status {
+    font-weight: bold
+}
+.hljs-light .asciidoc .hljs-emphasis,
+.hljs-light .markdown .hljs-emphasis {
+    font-style: italic
+}
+.hljs-light .nginx .hljs-built_in {
+    font-weight: normal
+}
+.hljs-light .coffeescript .javascript,
+.hljs-light .javascript .xml,
+.hljs-light .lasso .markup,
+.hljs-light .tex .hljs-formula,
+.hljs-light .xml .javascript,
+.hljs-light .xml .vbscript,
+.hljs-light .xml .css,
+.hljs-light .xml .hljs-cdata {
+    opacity: .5
+}
+.hljs-dark {
+    background: #f6f6f6
+}
+.hljs-dark .hljs {
+    display: block;
+    padding: .5em;
+    background: #23241f
+}
+.hljs-dark .hljs,
+.hljs-dark .hljs-tag,
+.hljs-dark .css .hljs-rules,
+.hljs-dark .css .hljs-value,
+.hljs-dark .css .hljs-function .hljs-preprocessor,
+.hljs-dark .hljs-pragma {
+    color: #f8f8f2
+}
+.hljs-dark .hljs-strongemphasis,
+.hljs-dark .hljs-strong,
+.hljs-dark .hljs-emphasis {
+    color: #a8a8a2
+}
+.hljs-dark .hljs-bullet,
+.hljs-dark .hljs-blockquote,
+.hljs-dark .hljs-horizontal_rule,
+.hljs-dark .hljs-number,
+.hljs-dark .hljs-regexp,
+.hljs-dark .alias .hljs-keyword,
+.hljs-dark .hljs-literal,
+.hljs-dark .hljs-hexcolor {
+    color: #ae81ff
+}
+.hljs-dark .hljs-tag .hljs-value,
+.hljs-dark .hljs-code,
+.hljs-dark .hljs-title,
+.hljs-dark .css .hljs-class,
+.hljs-dark .hljs-class .hljs-title:last-child {
+    color: #a6e22e
+}
+.hljs-dark .hljs-link_url {
+    font-size: 80%
+}
+.hljs-dark .hljs-strong,
+.hljs-dark .hljs-strongemphasis {
+    font-weight: bold
+}
+.hljs-dark .hljs-emphasis,
+.hljs-dark .hljs-strongemphasis,
+.hljs-dark .hljs-class .hljs-title:last-child {
+    font-style: italic
+}
+.hljs-dark .hljs-keyword,
+.hljs-dark .hljs-function,
+.hljs-dark .hljs-change,
+.hljs-dark .hljs-winutils,
+.hljs-dark .hljs-flow,
+.hljs-dark .lisp .hljs-title,
+.hljs-dark .clojure .hljs-built_in,
+.hljs-dark .nginx .hljs-title,
+.hljs-dark .tex .hljs-special,
+.hljs-dark .hljs-header,
+.hljs-dark .hljs-attribute,
+.hljs-dark .hljs-symbol,
+.hljs-dark .hljs-symbol .hljs-string,
+.hljs-dark .hljs-tag .hljs-title,
+.hljs-dark .hljs-value,
+.hljs-dark .alias .hljs-keyword:first-child,
+.hljs-dark .css .hljs-tag,
+.hljs-dark .css .unit,
+.hljs-dark .css .hljs-important {
+    color: #f92672
+}
+.hljs-dark .hljs-function .hljs-keyword,
+.hljs-dark .hljs-class .hljs-keyword:first-child,
+.hljs-dark .hljs-constant,
+.hljs-dark .css .hljs-attribute {
+    color: #66d9ef
+}
+.hljs-dark .hljs-variable,
+.hljs-dark .hljs-params,
+.hljs-dark .hljs-class .hljs-title {
+    color: #f8f8f2
+}
+.hljs-dark .hljs-string,
+.hljs-dark .css .hljs-id,
+.hljs-dark .hljs-subst,
+.hljs-dark .haskell .hljs-type,
+.hljs-dark .ruby .hljs-class .hljs-parent,
+.hljs-dark .hljs-built_in,
+.hljs-dark .sql .hljs-aggregate,
+.hljs-dark .django .hljs-template_tag,
+.hljs-dark .django .hljs-variable,
+.hljs-dark .smalltalk .hljs-class,
+.hljs-dark .django .hljs-filter .hljs-argument,
+.hljs-dark .smalltalk .hljs-localvars,
+.hljs-dark .smalltalk .hljs-array,
+.hljs-dark .hljs-attr_selector,
+.hljs-dark .hljs-pseudo,
+.hljs-dark .hljs-addition,
+.hljs-dark .hljs-stream,
+.hljs-dark .hljs-envvar,
+.hljs-dark .apache .hljs-tag,
+.hljs-dark .apache .hljs-cbracket,
+.hljs-dark .tex .hljs-command,
+.hljs-dark .hljs-prompt,
+.hljs-dark .hljs-link_label,
+.hljs-dark .hljs-link_url {
+    color: #e6db74
+}
+.hljs-dark .hljs-comment,
+.hljs-dark .hljs-javadoc,
+.hljs-dark .java .hljs-annotation,
+.hljs-dark .python .hljs-decorator,
+.hljs-dark .hljs-template_comment,
+.hljs-dark .hljs-pi,
+.hljs-dark .hljs-doctype,
+.hljs-dark .hljs-deletion,
+.hljs-dark .hljs-shebang,
+.hljs-dark .apache .hljs-sqbracket,
+.hljs-dark .tex .hljs-formula {
+    color: #75715e
+}
+.hljs-dark .coffeescript .javascript,
+.hljs-dark .javascript .xml,
+.hljs-dark .tex .hljs-formula,
+.hljs-dark .xml .javascript,
+.hljs-dark .xml .vbscript,
+.hljs-dark .xml .css,
+.hljs-dark .xml .hljs-cdata,
+.hljs-dark .xml .php,
+.hljs-dark .php .xml {
+    opacity: .5
+}
+code {
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    margin: 1.2em 0 .6em 0
+}
+blockquote h1,
+blockquote h2,
+blockquote h3,
+blockquote h4,
+blockquote h5,
+blockquote h6 {
+    font-weight: bold;
+    margin: .6em 0
+}
+.note-tags {
+    color: rgba(44, 63, 81, 0.3)
+}
+.note-tags code {
+    color: rgba(44, 63, 81, 0.5);
+    background: rgba(102, 128, 153, 0.075);
+    border-radius: 0;
+    padding: 2px 5px
+}
+.note-tags code:empty {
+    display: none
+}
+.note-tags .notebook {
+    background: rgba(44, 63, 81, 0.3);
+    color: #fff;
+    margin-right: 6px
+}
+table th,
+table td,
+table thead:first-child tr:first-child th {
+    padding: .5em;
+    border: 1px solid #ddd;
+    line-height: 1.5
+}
+
+
+
+
+
+
+a {
+    color: #0d70ff;
+}
+pre {
+    padding: 10px 0;
+    background: #fff;
+}
+hr {
+    margin-bottom: 38px;
+    border-top: 2px solid #f7f8f9;
+}
+h1,
+h2,
+h3 {
+    line-height: 1;
+}
+h1,
+h2,
+h3,
+h4 {
+    font-weight: normal;
+}
+h1 {
+    margin-bottom: 21px;
+    font-size: 24px;
+}
+h2 {
+    margin: 38px 0 20px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+h3 {
+    margin: 38px 0 20px;
+    font-size: 16px;
+}
+p {
+    margin: 0;
+    margin-bottom: 24px;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 24px;
+}
+h4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 30px 0 20px;
+}
+blockquote {
+    border: none;
+    border-left: 4px solid #0d70ff;
+    margin: 13px 0 20px;
+    padding: 0 0 0 14px;
+    background: #fff;
+}
+ul,
+ol {
+    margin-bottom: 24px;
+    padding-left: 21px;
+}
+li {
+    position: relative;
+    margin: 10px 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 24px;
+}
+ul {
+    li {
+        list-style-type: disc;
+    }
+}
+ol {
+    li {
+        list-style-type: decimal;
+    }
+}
+p+ul {
+    margin-top: -10px;
+}
+p+pre {
+    margin-top: -14px;
+}
+img {
+    display: inline-block;
+    margin-top: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: inset 1px 1px #ccc, inset -1px -1px #ccc;
+}
+
+code {
+    color: #0d70ff;
+    background-color: #ecf4ff;
+}
