@@ -104,7 +104,7 @@ renderer.image = function(href, title, text) {
         }
         imgAttr += '" ';
     }
-    var out = '<img src="' + href + imgAttr;
+    var out = '<img src="' + href + '" ' + imgAttr;
     if (title) {
         out += ' title="' + title + '"';
     }
