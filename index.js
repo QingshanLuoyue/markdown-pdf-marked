@@ -124,7 +124,7 @@ marked.setOptions({
     highlight: function (code, lang) {
       // return require('highlight.js').highlightAuto(code).value;
       // console.log(require('highlight.js').highlight(lang, code).value)
-      // console.log(code, lang)
+      console.log('lang = ', lang)
       // 此处可能md文档中没有制定语言，导致传入highlight的lang为undefined，导致highlight.js报错，所以默认语言为sql
       if (!lang) {
         lang = 'sql';
